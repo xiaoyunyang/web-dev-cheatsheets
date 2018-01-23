@@ -350,9 +350,28 @@ OAuth was developed by Twitter and Ma.gnolia. It is a standard for the delegatio
 Authentication is your username + password. Authorization is what you're allowed to do.
 
 ## Database
-There are two types of database: 
+**Why Database?**
 
-**[This Video](https://www.youtube.com/watch?v=eM7hzKwvTq8)** compares SQL with NoSql.
+* We want our data to live on after our server goes down (either because we manually stop it or it crashes)
+* When we have multiple servers and one set of data that they both need to use and update
+* A database is essentially a file management system. It gives us a way to structure our data, query our data, etc
+
+**SQL versus NoSQL**
+
+* [This Video](https://www.youtube.com/watch?v=eM7hzKwvTq8)** compares SQL with NoSql.
+* SQL databases are also called relational databases. Data is stored like spreadsheets. There are columns and rows. You need to define the columns when you first create the database. Each new entry is a new row and needs to conform to the schema. You use SQL protocol to interact with the database.
+* NoSQL, also known as non-relational database, are not generally structured like a spreadsheet. The protocol you use to query a NoSQL database can be anything from a RESTful HTTP request (like couchdb), a JSON-like protocol (such as the BSON of MongoDB), or a SQL-like protocol (such as Cassandra's CQL)
+
+
+[Kristof Kovacs](https://kkovacs.eu/cassandra-vs-mongodb-vs-couchdb-vs-redis?) put together a very good summary of all the different kinds of NoSQL databases and what they are good for:
+
+* MongoDB: for building a regular app that could benefit from a flexible schema for your database (such as building a website for a startup)
+* Redis: for building real-time stuff (such as stock prices, real-time communication, leaderboards)
+* Cassandra: for big data. It lets you use SQL-like queries, which can allow data scientists to port over their existing SQL skills.
+* HBase: for needing to store a gigantic table (e.g., to do matrix multiplication on or something). For example, a search engine like Google. This is based on Google's BigTable, with support for Map/reduce with Hadoop. Alternative are Accumulo, Hypertable. 
+	* Note:  If you are building a social network, don't be tempted to use BigTable to store graph. It's not efficient and you could have a very sparse table. Use a graph database, such as 
+
+
 
 ## Tools
 **Node Package Manager (NPM)**

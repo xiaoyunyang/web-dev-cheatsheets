@@ -30,7 +30,7 @@ We want to build a `react` and `node` app with user authentication via `passport
 **Security**
 
 * [`bcrypt-nodejs`](https://www.npmjs.com/package/bcrypt-nodejs) - used to hash strings and compare the hash with the hash stored in the database
-* [`crypto`](https://nodejs.org/api/crypto.html) - nodes's built in module for hashing.
+* [`crypto`](https://nodejs.org/api/crypto.html) - nodes's built in module for hashing. Deprecated.
 * [`helmet`](https://github.com/helmetjs/helmet) - Helps to secure your applications. It doesn’t magically make you more secure, but a small amount of work can protect you from a lot of hacks.
 
 
@@ -173,8 +173,48 @@ Same Tutorial is found here: [React Training](https://reacttraining.com/react-ro
 
 ## Set up your Database
 
+### MongoDB
+* Install MongoDB:  
 
-### PostgresQL
+	```
+	$ brew install mongodb
+	```
+* Create the data directory: 
+
+	```
+	$ sudo mkdir -p /data/db
+	```
+* Set permissions for the data directory: 
+	
+	```
+	$ sudo chown -R `whoami` /data/db	
+	```
+* Run MongoDB server: 
+	
+	```
+	$ mongod
+	```
+
+* Run MongoDB shell
+
+	```
+	$ mongo
+	```
+	
+* Install [Mongo.app](http://mongoapp.com/), which lets you launch an application that runs in the menu bar at the top right of your screen. You can tell when it’s running and when it’s not, easily start up a console, and shut it down effortlessly.
+
+* Things you can do in the mongoDB shell ([Quick Reference](https://docs.mongodb.com/manual/reference/mongo-shell/))
+
+	```
+	> use test $ switch to db test
+	> show collections $ list all collections inside current db
+	users
+	> db.users.find() $ in the users collection, return all documents
+	> db.users.remove( { } ) $ remove all documents in the users collection
+	```
+
+
+### PostgreSQL
 
 ##### Install Postgres
 Using Homebrew:  `brew install postgres`
@@ -196,7 +236,7 @@ Using Homebrew:  `brew install postgres`
 If you want to use a PostgresQL GUI, install and launch [Postico](https://eggerapps.at/postico/). Look up the User name using `looseleaf=# \du`.
 
 ## Connect App To Database
-we can use [`mongoose`](http://mongoosejs.com/) to provide database access for our App.
+we can use [`mongoose`](http://mongoosejs.com/) to provide database access for our application.
 
 * [Mozilla Tutorial for Express-Nodejs-mongoose setup](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose)
 * [mongoose getting started](http://mongoosejs.com/docs/index.html)

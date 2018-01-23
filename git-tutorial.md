@@ -41,6 +41,8 @@ In the Terminal, do the following:
 	$ git commit -m ‘Initial Commit!'
 	$ git push origin master
 	```
+	
+	Note, if you added a LICENSE file or a README file from Github, make sure to do a `git pull origin master` before you do a `git add --all`.
 
 7. Now open a file within `ProjectName` in [Atom](https://atom.io/) or another text editor. Make some changes to the code. To sync your local repo with your remote repo, do this:
 	
