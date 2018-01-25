@@ -88,63 +88,6 @@ printName()
 
 
 ## Gotchas
-### Scoping
-
-* [Everything You Need to Know about Scopes](https://toddmotto.com/everything-you-wanted-to-know-about-javascript-scope/) - which discusses closure.
-
-**What is Closure?**
-[What is closure?](https://medium.freecodecamp.org/lets-learn-javascript-closures-66feb44f6a44) 
-> Closures are functions that refer to independent (free) variables. In other words, the function defined in the closure ‘remembers’ the environment in which it was created.
-
-Closure is basically a design pattern where your function returns another function that takes an inputso you can call your closure like this: `myFun(arg1)(arg2)`, which is equivalent to
-
-```
-const myFun2 = myFun(arg1)myFun2(arg2)```It’s called currying and partial application - a key concept of functional programming, a key concept. Closure is a powerful design pattern because you can continuing chaining things like `myFun(arg1)(arg2)(arg3)…`. `myFun` does some calculation with using `arg1`, returns another function that takes the result of `myFun`'s calculation on `arg1` and `arg2` as input, then processes things further by calling a third function, which in turn calls a fourth function and so on. You can think of it like an assembly line in a factory.
-
-
-```javascript
-// A practical example of closure
-
-const getInfoFromURL = path => {
-  const URL = require("url").URL;
-  const myUrl = new URL(path)
-  const pathname = myUrl.pathname
-
-  const getUsernameFromURL = pathname => {
-    const regex = new RegExp('/@');
-    const username = pathname.split(regex).slice(1)[0]
-    if(!username) {
-      return "Error in parsing: URL needs to be in format://hostname:port/@username"
-    }
-    return username
-  }
-  const getPathnameFromURL = pathname => {
-    const regex = new RegExp('/');
-    const name = pathname.split(regex).slice(1)[0]
-    if(!name) {
-      return "Error in parsing: URL needs to be in format://hostname:port/pathname"
-    }
-    return name
-  }
-
-  return (param) => {
-    if (param == "username") return getUsernameFromURL(pathname)
-    else if (param == "pathname") return getPathnameFromURL(pathname)
-    else return "error"
-  }
-}
-
-module.exports = getInfoFromURL
-
-```
-How you call the above code?
-
-```javascript
-// You should get "xiaoyunyang" 
-getInfoFromURL("https://medium.com/@xiaoyunyang")("username")
-// You should get "@xiaoyunyang
-getInfoFromURL(path)("pathname")
-```
 
 
 ### Callback Hell
@@ -701,10 +644,12 @@ const data = [
 
 ### Resources
 
+* [Free javascript books](https://jsbooks.revolunet.com/)
 * `babel-preset-es2015` is deprecated. Use `babel-preset-env` instead. [Read about it here](http://babeljs.io/env). `babel-preset-env` node [not working](https://github.com/facebookincubator/create-react-app/issues/1125) in create-react-app
 * [set up](https://babeljs.io/docs/plugins/transform-runtime/) `babel-runtime`, which "externalise references to helpers and builtins, automatically polyfilling your code without polluting globals.
 * [Christophe Coenraets's Tutorial](http://ccoenraets.github.io/es6-tutorial/setup-babel/)
 
 
 ## TODO
-[ ] Add javascript date function cheatsheet (see [react-native-travel-app](https://github.com/xiaoyunyang/react-native-travel-app) for the code) 
+- [ ] Add javascript date function cheatsheet (see [react-native-travel-app](https://github.com/xiaoyunyang/react-native-travel-app) for the code)
+- [ ] Add date functions.

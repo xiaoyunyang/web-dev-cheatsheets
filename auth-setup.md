@@ -189,16 +189,15 @@ Same Tutorial is found here: [React Training](https://reacttraining.com/react-ro
 	```
 	$ sudo chown -R `whoami` /data/db	
 	```
-* Run MongoDB server: 
+* Run MongoDB server in one terminal and then MongoDB shell in another terminal: 
 	
 	```
 	$ mongod
 	```
 
-* Run MongoDB shell
-
 	```
 	$ mongo
+	>
 	```
 	
 * Install [Mongo.app](http://mongoapp.com/), which lets you launch an application that runs in the menu bar at the top right of your screen. You can tell when it’s running and when it’s not, easily start up a console, and shut it down effortlessly.
@@ -211,8 +210,13 @@ Same Tutorial is found here: [React Training](https://reacttraining.com/react-ro
 	users
 	> db.users.find() $ in the users collection, return all documents
 	> db.users.remove( { } ) $ remove all documents in the users collection
+	> db.users.remove( { index } )
+	> db.users.dropIndexes()
 	```
 
+**Resources**
+* [Azat Marda's Cheatsheet](https://github.com/azat-co/cheatsheets/tree/master/mongodb-mongoose)
+* [Little Mongo Handbook](http://openmymind.net/mongodb.pdf)
 
 ### PostgreSQL
 
