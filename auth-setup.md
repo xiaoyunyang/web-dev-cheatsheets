@@ -1,3 +1,5 @@
+# Authentication Setup
+
 ## Goal
 We want to build a `react` and `node` app with user authentication via `passport`, `mongo` for database, and `mongoose` to connect the app to the database. 
 
@@ -73,6 +75,14 @@ The `User` model will include logic for authentication, including:
 
 ## Set up the Authentication Process
 
+**What is authentication?**
+
+It's a way to verify the person visiting your webpage has the right credentials to access the webpage. Credentials are extracted from cookies, sessions, and user login.
+
+
+**What is passport?**
+
+`passport` is an authentication middleware for node. Passport implements the boilerplate code for authenticating the user so you don't have to write the boilerplate code yourself. 
 
 **Passport Setup**
 
@@ -122,6 +132,57 @@ The `User` model will include logic for authentication, including:
 **Set up passport with auth0**
 
 [https://github.com/auth0/passport-auth0](https://github.com/auth0/passport-auth0)
+
+## Set up Open Authentication With Passport
+
+To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you will need to **obtain API keys**. I have included "throw-away" API keys for all OAuth providers to get you up and running quickly, but be sure to update them with your own keys.
+
+### Facebook
+1. Go to [Facebook Developers](https://developers.facebook.com/). Click on **My Apps** dropdown, then select **Add a New App**.
+2. Select **Website** platform, then click on **Skip and Create App ID** button. 
+	- Enter a **name** and choose a **category** for your app. 
+	- Click on **Create App ID** button. 
+3. Click on the **Settings** tab, then click on **+ Add Platform** button. 
+ 	- Select **Website**, then enter `http://localhost:3001/auth/facebook/callback` in the **Site URL**.
+4. Copy and paste **App ID** and **App Secret** keys into `.env` file: 
+	 - `FACEBOOK_ID='YOUR_APP_ID'` 
+	 - `FACEBOOK_SECRET='YOUR_APP_SECRET'`
+
+### Google
+1. Go to [Google Cloud Console](https://cloud.google.com/console/project), then select **Create project**. 
+	- Enter a **Project name**, then click on **Create** button.
+	- Click on **Use Google APIs** (Enable and manage APIs) panel. 
+2. Click on **Credentials** tab in the sidebar. Click on **Create credentials** dropdown, then select **OAuth client ID**. Select or enter the following: 
+	- **Application type**: `Web application` 
+	- **Authorized JavaScript origins**: `http://localhost:3001` 
+	- **Authorized redirect URIs**: `http://localhost:3001/auth/google/callback` 
+	- Click on **Create** button. 
+3. Copy and paste **client ID** and **client secret** keys into `.env` file: 
+	- `GOOGLE_ID='YOUR_CLIENT_ID'` 
+	- `GOOGLE_SECRET='YOUR_CLIENT_SECRET'`
+
+### Twitter
+1. Go to [Twitter Application Management](https://apps.twitter.com/). 
+2. Click on **Create New App** button. Fill out required fields. 	- **Callback URL**: `http://127.0.0.1:3001/auth/twitter/callback` 
+3. Go to **Settings** tab. 
+	 - Click on **Allow this application to be used to Sign in with Twitter** checkbox. 
+	 - Click on **Update Settings** button. 
+4. Go to **Keys and Access Tokens** tab. Copy and paste **Consumer Key** and **Consumer Secret** keys into `.env` file: 
+	 - `TWITTER_ID='YOUR_CONSUMER_KEY'` 
+	 - `TWITTER_SECRET='YOUR_CONSUMER_SECRET'`
+
+### Github
+1. Go to [Github Developer Applications Settings](https://github.com/settings/developers) 
+2. Click on **Register a new application** button. Fill out required fields. 
+	- **Application Name** 
+	- **Homepage URL** 
+	- **Callback URL**: `http://127.0.0.1:3001/auth/github/callback` 
+	- Click on **Register application** 
+3. Copy and paste **client ID** and **client secret** keys into `.env` file: 
+	- `GITHUB_ID='YOUR_CLIENT_ID'` 
+	- `GITHUB_SECRET='YOUR_CLIENT_SECRET'`
+
+Note: If you are using React or AngularJS, copy and paste client secret into .env file and client ID into app/actions/oauth.js (React) and app/app.js (AngularJS).
 
 ## Integration With React Router
 
@@ -205,23 +266,28 @@ Same Tutorial is found here: [React Training](https://reacttraining.com/react-ro
 * Things you can do in the mongoDB shell ([Quick Reference](https://docs.mongodb.com/manual/reference/mongo-shell/))
 
 	```
+	> show dbs  $ see all available databases
 	> use test $ switch to db test
+	> db $ see which data you are using currently
 	> show collections $ list all collections inside current db
 	users
 	> db.users.find() $ in the users collection, return all documents
 	> db.users.remove( { } ) $ remove all documents in the users collection
 	> db.users.remove( { index } )
 	> db.users.dropIndexes()
+
 	```
 
 **Resources**
 * [Azat Marda's Cheatsheet](https://github.com/azat-co/cheatsheets/tree/master/mongodb-mongoose)
 * [Little Mongo Handbook](http://openmymind.net/mongodb.pdf)
+* MongoDB's [official documentation](https://docs.mongodb.com/manual/mongo/)
+
 
 ### PostgreSQL
 
 ##### Install Postgres
-Using Homebrew:  `brew install postgres`
+Using Homebrew:  `$ brew install postgres`
 ##### Start Postgres
 * Automatic:
 	* `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql` - This makes Postgres start every time your computer starts up. Execute the following command
@@ -231,19 +297,25 @@ Using Homebrew:  `brew install postgres`
 	* Stop Postgres: `pg_ctl -D /usr/local/var/postgres stop`
 
 ##### Database Management
-* `createdb looseleaf` - creates a database called looseleaf
-* `dropdb looseleaf` - delete the database called looseleaf
-* `psql looseleaf` - access the database called looseleaf. After you type this, you'll see this: `looseleaf=#`, which is the header for the postgres database interface. Type the command after the `#`. For example:
+* `> createdb looseleaf` - creates a database called looseleaf
+* `> dropdb looseleaf` - delete the database called looseleaf
+* `> psql looseleaf` - run the database called looseleaf. After you type this, you'll see this: `looseleaf=#`, which is the header for the postgres database interface. Type the command after the `#`. For example:
 	* `looseleaf=# \du` - see what users are installed
 	* `looseleaf=# \h` - help
 	* `looseleaf=# \q` - quit
 If you want to use a PostgresQL GUI, install and launch [Postico](https://eggerapps.at/postico/). Look up the User name using `looseleaf=# \du`.
+
+Integrate Postgres with your Node app:
+
+*  Link database to your app: In the `.env` file in the root directory of the app, edit the DB_NAME line to say `DB_NAME='looseleaf'` and change `DB_USER` to the name as appeared when you run the `looseleaf=# \du` command above.
+* If you don't start the database before you run `npm start`, then you will get a "Knex: Error Pool 2 - Error: connect ECONNREFUSED" error.
 
 ## Connect App To Database
 we can use [`mongoose`](http://mongoosejs.com/) to provide database access for our application.
 
 * [Mozilla Tutorial for Express-Nodejs-mongoose setup](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose)
 * [mongoose getting started](http://mongoosejs.com/docs/index.html)
+* [Connect mongoose to mongodb](http://mongoosejs.com/docs/connections.html)
  
 
 ## Debugging

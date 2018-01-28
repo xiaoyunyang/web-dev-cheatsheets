@@ -177,6 +177,8 @@ typeof "1" //> "string"
 typeof [1,2,3] //> "object"
 typeof {"name": "john", "country": "usa"} //> "object"
 typeof [{"name": "john", "country": "usa"}, {"name": "mary", "country": "uk"}] //> "object"
+
+typeof trye //> "boolean"
 typeof (1 === 1) //> "boolean"
 
 typeof undefined //> "undefined"
@@ -209,7 +211,13 @@ null === undefined //> false
 0 === false  //> false, because they are of a different type
 ```
 
-**Null versus Undefined**
+**Null versus Undefined versus 0**
+
+```javascript
+!0 //> true
+!null //> true
+!undefined //true
+```
 
 ```javascript
 typeof undefined //> "undefined"
@@ -220,7 +228,7 @@ undefined === null //> false
 
 isNaN(1 + undefined) // true
 isNaN(1 + null)  // false
-a + null //> 1
+1 + null //> 1
 
 !null //> true
 !undefined //> true
@@ -266,9 +274,9 @@ My advice is to always use `===` since that is a more thorough check and help yo
 
 ```javascript
 if(u.country === undefined || u.country === null)
+//OR better
+if(!u.country)
 ```
-
-
 
 ### Scoping in JavaScript
 Many languages use block-level scope, in which variables exist only within the current “block” of code, usually indicated by curly braces (`{ }`).
@@ -308,6 +316,14 @@ There are two easy workarounds:
 	```
 	
 ## Array and String Functions
+
+### Get stuff from an array
+
+``javascript
+const arr = [1, 2, 3, 4];
+const [first, second] = arr;
+```
+
 
 ### Get last elem of an array
 
@@ -538,6 +554,18 @@ console.log(newData); //> {1: "A", 2: "B", 3: "C", 4: "D"}
 
 ```
 
+
+**Destructuring**
+>Using object destructuring saves you from creating temporary references for those properties.
+
+```javascript
+var user = {firstName: "amy", lastName:"winehouse"}
+var {firstName, lastName} = user
+firstName //> "amy"
+lastName //> "winehouse"
+
+```
+
 ### Practice
 
 **Given**
@@ -648,7 +676,17 @@ const data = [
 * `babel-preset-es2015` is deprecated. Use `babel-preset-env` instead. [Read about it here](http://babeljs.io/env). `babel-preset-env` node [not working](https://github.com/facebookincubator/create-react-app/issues/1125) in create-react-app
 * [set up](https://babeljs.io/docs/plugins/transform-runtime/) `babel-runtime`, which "externalise references to helpers and builtins, automatically polyfilling your code without polluting globals.
 * [Christophe Coenraets's Tutorial](http://ccoenraets.github.io/es6-tutorial/setup-babel/)
-
+* [The most popular javascript links of 2017](https://medium.com/dailyjs/the-most-popular-javascript-links-of-2017-e4616e8b48c7)
+* [Modern JS Cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet) 😍
+* [Wearhive's List Of Best Practices for JavaScript Projects](https://github.com/wearehive/project-guidelines#readme) 😍
+* [Airbnb's JavaScript Style Guide](https://github.com/airbnb/javascript) 😍
+* [How JavaScript Works: Memory Management + How to Handle Four Common Memory Leaks](https://blog.sessionstack.com/how-javascript-works-memory-management-how-to-handle-4-common-memory-leaks-3f28b94cfbec)
+* [Tricky Closure Inteview Question](https://medium.com/coderbyte/a-tricky-javascript-interview-question-asked-by-google-and-amazon-48d212890703)
+* [JavaScript Closure Questions](https://coderbyte.com/algorithm/3-common-javascript-closure-questions)
+* [Three Questions to watch out for in JavaScript Interview](https://medium.freecodecamp.org/3-questions-to-watch-out-for-in-a-javascript-interview-725012834ccb)
+* [Making Functional Programming Click](https://hackernoon.com/making-functional-programming-click-836d4715baf2) 😍
+* [Coders At Work](http://one-shore.com/aaron/books/coders-at-work.pdf)
+* [97 things every programmer should know](file:///Users/xiaoyun/Downloads/97_Things_Every_Programmer_Should_Know.pdf)
 
 ## TODO
 - [ ] Add javascript date function cheatsheet (see [react-native-travel-app](https://github.com/xiaoyunyang/react-native-travel-app) for the code)
