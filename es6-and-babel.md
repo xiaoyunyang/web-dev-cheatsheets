@@ -319,11 +319,10 @@ There are two easy workarounds:
 
 ### Get stuff from an array
 
-``javascript
+```javascript
 const arr = [1, 2, 3, 4];
 const [first, second] = arr;
 ```
-
 
 ### Get last elem of an array
 
@@ -341,8 +340,8 @@ arr2 //> Even const can't help you
 const arr3 = arr
 arr3.pop() //>2
 arr //> [1] ... arr got changed even though arr3 did the pop
-
 ```
+
 Do this instead:
 
 ```javascript
@@ -373,13 +372,11 @@ arr.slice(2) //> [3]
 
 ["hello","World"].reduce( (a, res) => { return a + res }, "My message: " )
 //> "My message: helloWorld"
-
 ```
 
 ```javascript
 ['a','b','c'].join("") //> "abc"
 ['a','b','c'].map(d => "1"+d).join(",") //> "1a,1b,1c"
-
 ```
 
 If you don’t pass in an initial value, reduce will assume the first item in your array is your initial value.
@@ -586,6 +583,7 @@ const data = [
 ## Babel
 
 * [What is Babel?](https://kleopetrov.me/2016/03/18/everything-about-babel/)
+	>Babel is a highly configurable compiler that lets you use experimental JavaScript features and extensions, compiling down into older JavaScript versions that can be supported on a wider range of platforms. Of course, if a native platform doesn't support an ES2015 feature like Promise(), Babel won't fully be able to help -- but it can in many cases "polyfill" missing APIs to provide this functionality.
 * [React Express Tutorial](http://www.react.express/modern_javascript)
 	
 	>ECMAScript is the language specification used to implement the JavaScript language. Nearly every JavaScript environment today can run at least ECMAScript 5 (ES5), the version of JavaScript introduced in 2009. However, there are many new features in the latest versions of JavaScript that we'd like to use. Thanks to Babel, we can use them today! Babel transforms newer features into ES5 for cross-platform compatibility.

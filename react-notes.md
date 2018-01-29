@@ -321,3 +321,24 @@ class App extends Component {
 * Every React component can be passed a special prop called the `key`. React uses this `key` to determine the rendered element's identity. Understanding element identity is critical for performance and minimizing DOM manipulation: for example, if the first element in a list of thousands should no longer be rendered, React needs some way to detect this. Instead of re-rendering thousands of elements, React can simply remove a single DOM node for the first element, which is much more efficient.
 * if you wanted to, you could assign a key to every element. You can even force a component to re-render by assigning a different key (this tells React that the element's identity has changed, thus triggering a re-render). But most of the time, you don't need to consider keys because React takes care of them automatically. It's likely the only time you'll need to use them is when rendering lists of elements.
 * Ideally, we want to make the `key` the unique identifier for the items in the list (i.e., its actual value). If items in our data have no unique identifier of any kind, then we will generally resort to using the index of the item as its key. This silences the warning from React about forgetting to include keys, but remember that doing this will cause React to identify elements incorrectly if the data is modified
+
+### Learning Resources
+**React**
+
+* Brad Westfall's [LearnReact Series](https://github.com/bradwestfall/Learn-React)
+* [React.Express Tutorial](http://www.react.express) - Learn about React, Redux, ES6, Babel, Webpack
+
+**React Router**
+
+* [react-router-config](https://www.npmjs.com/package/react-router-config)
+* [Starter project tutorial](https://www.mokuji.me/article/universal-app-react-router)
+* [Egghead Tutorial](https://egghead.io/lessons/react-create-basic-routes-with-the-react-router-v4-browserrouter)
+* [route-config example](https://reacttraining.com/react-router/web/example/route-config)
+* [A Simple Tutorial](https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf)
+* [Site Point Tutorial](https://www.sitepoint.com/react-router-v4-complete-guide/)
+* [Detailed Tutorial](https://blog.digitalkwarts.com/server-side-rendering-with-reactjs-react-router-v4-react-helmet-and-css-modules/)
+* [Lessons learned from migrating to v4 from an earlier version](https://webuild.envato.com/blog/a-real-word-story-of-upgrading-react-router-to-v4-in-an-isomorphic-app/)
+* [unofficial migration guide](https://codeburst.io/react-router-v4-unofficial-migration-guide-5a370b8905a).
+5. [Read this](https://github.com/ReactTraining/react-router/pull/4934) for more on how to fix the deprecation warnings.
+	> Failed Context Types: Calling PropTypes validators directly is not supported by the `prop-types` package
+* [Integrate React Router v4 with Server Router](https://crypt.codemancers.com/posts/2017-06-03-reactjs-server-side-rendering-with-router-v4-and-redux/)

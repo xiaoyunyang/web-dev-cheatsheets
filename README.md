@@ -8,3 +8,10 @@
 * [Closure and Scope](/scoping-and-closure-in-javascript.md)
 * [Functional Programming](/functional-programming.md)
 * [D3 and Integration With React](/d3-react-integration.md)
+
+
+## Guides
+
+* [Modern JS Cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet) 😍
+* [Wearhive's List Of Best Practices for JavaScript Projects](https://github.com/wearehive/project-guidelines#readme) 😍
+* Airbnb's [JavaScript Style Guide](https://github.com/airbnb/javascript) 😍

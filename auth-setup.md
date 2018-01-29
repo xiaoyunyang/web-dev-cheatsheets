@@ -1,4 +1,4 @@
-# Authentication Setup
+# Authentication and Database Setup
 
 ## Goal
 We want to build a `react` and `node` app with user authentication via `passport`, `mongo` for database, and `mongoose` to connect the app to the database. 
@@ -396,18 +396,23 @@ Everytime something happens, a new state object is created to reflect the change
 Sessions are basically cookies that also gives you the ability to define the backend storage used by the server part of your application
 	
 **Client Side Routing**	
-> 	
 
 
 ## Resources
+* Why [open authentication](https://scotch.io/tutorials/the-easiest-way-to-add-authentication-to-any-app)?
+* [`passport-mongo-local`](https://github.com/saintedlama/passport-local-mongoose)
+* [Connect mongoose to mongodb](http://mongoosejs.com/docs/connections.html)
 * Scotch.io Tutorial
 	* [set up passport-local](https://scotch.io/tutorials/easy-node-authentication-setup-and-local) 
 	* [set up passport-facebook](https://scotch.io/tutorials/easy-node-authentication-facebook) 
 * [node passport and postgres setup](http://mherman.org/blog/2016/09/25/node-passport-and-postgres/) - Good tutorial on integrating `passport` with `postgres` and  `knex`
 * [postgres with passport](http://uitblog.com/postgres-with-passport/)
-* [node passport and postgres Medium](https://reallifeprogramming.com/node-authentication-with-passport-postgres-ef93e2d520e7)
+* [node passport and postgres](https://reallifeprogramming.com/node-authentication-with-passport-postgres-ef93e2d520e7)
 * [codeMentor](https://www.codementor.io/devops/tutorial/getting-started-postgresql-server-mac-osx) - Getting Started Tutorial for postgresql
-* [Tutorials Point MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/mongodb_overview.htm)
+* [node passport and postgres setup](http://mherman.org/blog/2016/09/25/node-passport-and-postgres/)
+* [node passport and mongo setup](http://mherman.org/blog/2013/11/11/user-authentication-with-passport-dot-js/#setup) 
+* [postgres with passport](http://uitblog.com/postgres-with-passport/)
+* [TutorialsPoint MongoDB Tutorial](https://www.tutorialspoint.com/mongodb/mongodb_overview.htm)
+* [MongoDB official documentation](https://docs.mongodb.com/manual/mongo/)
 * [Postgres vs Mongo - Youtube video](https://www.youtube.com/watch?v=eM7hzKwvTq8)
 * [best practice for handling sessions in redux](https://github.com/reactjs/redux/issues/297)
-
