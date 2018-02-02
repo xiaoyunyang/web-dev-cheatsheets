@@ -266,6 +266,46 @@ These are the typical [HTTP status codes](https://www.wikiwand.com/en/List_of_HT
 
 See more [from the DigitalOcean Tutorial](https://www.digitalocean.com/community/tutorials/how-to-troubleshoot-common-http-error-codes)
 
+## GraphQL
+[REST vs GraphQL](https://blog.pusher.com/rest-versus-graphql/)
+> GraphQL is a declarative data fetching specification and query language for APIs. It was created by Facebook back in 2012 to power their mobile applications. It is meant to provide a common interface between the client and the server for data fetching and manipulations. GraphQL was open sourced by Facebook in 2015.
+
+> REST and GraphQL can both be operated over HTTP, though GraphQL is protocol agnostic.
+
+In 2016 [Github migrated its API from REST to GraphQL](https://developer.github.com/v4/guides/intro-to-graphql/)
+
+[Apollo's Article](https://dev-blog.apollodata.com/graphql-vs-rest-5d425123e34b) on two ways to send data over HTTP states:
+> GraphQL is presented as a revolutionary new way to think about APIs. Instead of working with rigid server-defined endpoints, you can send queries to get exactly the data you’re looking for in one request.
+
+With REST:
+
+```
+GET /books/1
+{
+  "title": "Black Hole Blues",
+  "author": { 
+    "firstName": "Janna",
+    "lastName": "Levin"
+  }
+  // ... more fields here
+}
+```
+
+With GraphQL:
+
+```
+GET /graphql?query={ book(id: "1") { title, author { firstName } } }
+{
+  "title": "Black Hole Blues",
+  "author": {
+    "firstName": "Janna",
+  }
+}
+```
+
+>The core idea of REST is the resource. Each resource is identified by a URL, and you retrieve that resource by sending a GET request to that URL. You will likely get a JSON response, since that’s what most APIs are using these days.
+>We can see that the URL with a GraphQL query specifies the resource we’re asking for and also which fields we care about. Also, rather than the server author deciding for us that the related author resource needs to be included, the consumer of the API decides.
+
 ## Backend
 Modern web apps are built on sophisticated frontend frameworks like React that handles all the UI logic, even routing (`react-router`). While [any backend](https://www.wikiwand.com/en/Comparison_of_web_frameworks) will do the job and developers choose backend frameworks based on their language of choice (e.g., ruby's Ruby on Rails, python's Django, scala's Play, Haskell's Yesod etc.), a poor performing backend can really hurt your webapp's performance and scalability. We need to keep [three main things to consider](https://www.quora.com/Would-you-choose-Node-js-Express-js-or-Play-framework-Java-for-a-new-web-app-project-Why) when choosing a backend framework:
 

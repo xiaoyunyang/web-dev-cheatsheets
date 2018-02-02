@@ -158,7 +158,8 @@ callApi = async () => {
 
 **Promise**
 
-Use `Promise`, which is natively supported by ES6. Check out [the google tutorial](https://developers.google.com/web/fundamentals/primers/promises) on `Promise`.
+* Use `Promise`, which is natively supported by ES6. Check out [the google tutorial](https://developers.google.com/web/fundamentals/primers/promises) on `Promise`.
+* See [Scotch.io Tutorial for Promise](https://scotch.io/tutorials/javascript-promises-for-dummies)
 
 >Async functions - making promises friendly
 

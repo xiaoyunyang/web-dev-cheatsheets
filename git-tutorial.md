@@ -19,26 +19,26 @@ In the Terminal, do the following:
 
 1. Type `cd` into the terminal then drag the `ProjectName` folder  into the terminal. You’ll see `directoryPath` being auto-completed in Terminal.
 
-	$`cd directoryPath` 
+	`$ cd directoryPath` 
 
 3. Initialize the `ProjectName` folder as a git repo. This essentially makes this folder a "local git repo".
 
-	$`git init`
+	`$ git init`
 
 4. Link your "local git repo" to a "remote git repo" that you own. Call this remote git repo `origin`.
 
-	$`git remote add origin ssh://git@github.com/userA/ProjectName.git`
+	`$ git remote add origin ssh://git@github.com/userA/ProjectName.git`
 
 5. Make sure `origin` is an available remote.
 
-	$`git remote`
+	`$ git remote`
 
 5. Sync your local repo to your remote repo.
 
 	```
 	$ git fetch origin
 	$ git add --all
-	$ git commit -m ‘Initial Commit!'
+	$ git commit -m 'Initial Commit!'
 	$ git push origin master
 	```
 	
@@ -49,7 +49,7 @@ In the Terminal, do the following:
 	```
 	$ git fetch origin
 	$ git add --all
-	$ git commit -m ‘I made some changes!'
+	$ git commit -m 'I made some changes!'
 	$ git push origin master
 	```
 
@@ -67,40 +67,40 @@ In the Terminal, do the following:
 
 1. Type `cd` into the terminal and drag and drop the folder where you want to create the project folder from Finder into Terminal. You’ll see directoryPath being auto-completed in Terminal.
 
-	$`cd directoryPath` 
+	`$ cd directoryPath` 
 
 2. Make a new folder called `ProjectName`.
 
-	$`mkdir ProjectName`
+	`$ mkdir ProjectName`
 
 3. Go into the `ProjectName` folder
 
-	$`cd ProjectName`
+	`$ cd ProjectName`
 
 4. Initialize the `ProjectName` folder as a git repo. This essentially makes this folder a "local git repo".
 
-	$`git init`
+	`$ git init`
 
 5. Link your "local git repo" to a "remote git repo" that you own. Call this remote git repo `origin`.
 
-	$`git remote add origin ssh://git@github.com/userC/ProjectName.git`
+	`$ git remote add origin ssh://git@github.com/userC/ProjectName.git`
 
 6. Populate the `ProjectName` folder on your computer (i.e., local repo) with the files from the remote repo's master branch.
 
 
-	$`git pull origin master`
+	`$ git pull origin master`
 
 7. List the files in your `ProjectName` folder to make sure the pull was successful. You should see this folder populated with files downloaded from the remote repo
 
-	$`ls`
+	`$ ls`
 
 8. Link your "local git repo" to another remote git repo that userB owns. Recall you forked the `ProjectName` repo from userB. The upstream user's (i.e., userB) repo. Call this `upstream`.
 	
-	$`git remote add upstream https://github.com/userB/ProjectName`
+	`$ git remote add upstream https://github.com/userB/ProjectName`
 
 9. Make sure `origin` and `upstream` are both available remote.
 
-	$`git remote`
+	`$ git remote`
 	
 10. Now open a file within `ProjectName` in [Atom](https://atom.io/) or another text editor. Make some changes to the code. To sync your local repo with your remote repo, do this:
 
@@ -113,7 +113,7 @@ In the Terminal, do the following:
 	
 11. To sync your local repo with userB's repo, do the following:
 
-	$`git pull upstream master` 
+	`$ git pull upstream master` 
 	
 	
 
@@ -129,7 +129,14 @@ Some useful things you can do when things go haywire or just to get the most use
 	# commit: <commitID>
 	# ...
 	
+	# type q to exit the log
+	: 
+	
+	# force your local to the commitID
 	$ git reset --hard <commitID>
+	
+	# force your remote to the commitID
+	$ git push --force origin master
 	
 	```
 
@@ -161,7 +168,7 @@ Some useful things you can do when things go haywire or just to get the most use
 4. If you accidentally initiated a directory as a git repo, this undos the `git init`:
 
 	```
-	$ rm -rf .git #i
+	$ rm -rf .git
 	```
 
 5. 	If you don't want to have to enter your password everytime when you push to a remote, then in the project local repo, do the following:
@@ -216,6 +223,7 @@ coverage
 
 # API keys
 .env
+auth.js
 
 # Dependency directory
 node_modules

@@ -138,12 +138,16 @@ It's a way to verify the person visiting your webpage has the right credentials 
 To use any of the included OAuth providers (e.g. Facebook, Twitter, Google), you will need to **obtain API keys**. I have included "throw-away" API keys for all OAuth providers to get you up and running quickly, but be sure to update them with your own keys.
 
 ### Facebook
+[Read the official doc](https://developers.facebook.com/docs/facebook-login/web) and Check out the [Facebook Developer help community](https://www.facebook.com/help/community/question/?id=237899156642623)
+
 1. Go to [Facebook Developers](https://developers.facebook.com/). Click on **My Apps** dropdown, then select **Add a New App**.
 2. Select **Website** platform, then click on **Skip and Create App ID** button. 
 	- Enter a **name** and choose a **category** for your app. 
 	- Click on **Create App ID** button. 
-3. Click on the **Settings** tab, then click on **+ Add Platform** button. 
- 	- Select **Website**, then enter `http://localhost:3001/auth/facebook/callback` in the **Site URL**.
+3. Under Products > Facebook Login > QuickStart, click on **+ Add Platform** button. Facebook will ask you "Tell us what the URL of your site is". Make sure Site URL is `http://localhost:3000/auth/facebook/callback`.
+4. Under Products > Facebook Login > Settings, 
+	- ensure Valid OAuth redirects URIs is `http://localhost:3000/auth/facebook/callback`, which should match Site URL from the previous step.
+	- Make sure you turn on "Client OAuth Login" and "Web OAuth Login"
 4. Copy and paste **App ID** and **App Secret** keys into `.env` file: 
 	 - `FACEBOOK_ID='YOUR_APP_ID'` 
 	 - `FACEBOOK_SECRET='YOUR_APP_SECRET'`
@@ -293,8 +297,8 @@ Using Homebrew:  `$ brew install postgres`
 	* `pg_ctl -D /usr/local/var/postgres start && brew services start postgresql` - This makes Postgres start every time your computer starts up. Execute the following command
 	* `brew services start postgresql` - To have launchd start postgresql now and restart at login
 * Manual
-	* Start Postgres: `pg_ctl -D /usr/local/var/postgres start`
-	* Stop Postgres: `pg_ctl -D /usr/local/var/postgres stop`
+	* Start Postgres: `$ pg_ctl -D /usr/local/var/postgres start`
+	* Stop Postgres: `$ pg_ctl -D /usr/local/var/postgres stop`
 
 ##### Database Management
 * `> createdb looseleaf` - creates a database called looseleaf
@@ -317,6 +321,9 @@ we can use [`mongoose`](http://mongoosejs.com/) to provide database access for o
 * [mongoose getting started](http://mongoosejs.com/docs/index.html)
 * [Connect mongoose to mongodb](http://mongoosejs.com/docs/connections.html)
  
+[mongoose Schemas](http://mongoosejs.com/docs/guide.html) 
+ > Do not declare methods using ES6 arrow functions (=>). Arrow functions [explicitly prevent binding](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions#No_binding_of_this) this, so your method will not have access to the document and the above examples will not work.
+ 
 
 ## Debugging
 * [`node-inspector`](https://github.com/node-inspector/node-inspector)
@@ -329,7 +336,6 @@ we can use [`mongoose`](http://mongoosejs.com/) to provide database access for o
 
 * [What is Babel?](https://kleopetrov.me/2016/03/18/everything-about-babel/)
 * [How to set up Babel](http://www.react.express/babel)
-
 
 	```
 	$ npm install --save-dev babel-loader babel-core babel-preset-react babel-preset-env babel-preset-stage-1 babel-plugin-transform-runtime
@@ -402,9 +408,10 @@ Sessions are basically cookies that also gives you the ability to define the bac
 * Why [open authentication](https://scotch.io/tutorials/the-easiest-way-to-add-authentication-to-any-app)?
 * [`passport-mongo-local`](https://github.com/saintedlama/passport-local-mongoose)
 * [Connect mongoose to mongodb](http://mongoosejs.com/docs/connections.html)
-* Scotch.io Tutorial
-	* [set up passport-local](https://scotch.io/tutorials/easy-node-authentication-setup-and-local) 
-	* [set up passport-facebook](https://scotch.io/tutorials/easy-node-authentication-facebook) 
+* Passport Tutorial
+	* Scotch.io - [set up passport-local](https://scotch.io/tutorials/easy-node-authentication-setup-and-local) 
+	* Scotch.io - [set up passport-facebook](https://scotch.io/tutorials/easy-node-authentication-facebook) 
+	* DJAMware - [Set up passport with facebook twitter, Google, and Github login](https://www.djamware.com/post/59a6257180aca768e4d2b132/node-express-passport-facebook-twitter-google-github-login)
 * [node passport and postgres setup](http://mherman.org/blog/2016/09/25/node-passport-and-postgres/) - Good tutorial on integrating `passport` with `postgres` and  `knex`
 * [postgres with passport](http://uitblog.com/postgres-with-passport/)
 * [node passport and postgres](https://reallifeprogramming.com/node-authentication-with-passport-postgres-ef93e2d520e7)
