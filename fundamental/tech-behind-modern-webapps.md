@@ -165,6 +165,14 @@ While we (people) can view the JSON via clicking on the link and opening it up i
 GET https://api.github.com/users/xiaoyunyang/repos
 ```
 
+which can be generalized as follows:
+
+```
+<HTTP Verb> <Endpoint>
+```
+
+**Endpoint** is the address (i.e., a URL) of the service. We will discuss HTTP in the section below.
+
 The above example is supported by the [Github API](https://developer.github.com/v3/repos/#list-your-repositories). Many websites that collect a lot of data from their users provide an API that allows web developers to access that data. Some good APIs include:
 
 * [Twitter API](https://developer.twitter.com/en/docs/tweets/post-and-engage/overview) - Grab tweets (useful for news websites)

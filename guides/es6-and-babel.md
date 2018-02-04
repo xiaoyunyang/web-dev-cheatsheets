@@ -318,6 +318,35 @@ There are two easy workarounds:
 	
 ## Array and String Functions
 
+See [Mutating vs Nonmutating array operation](https://lorenstewart.me/2017/01/22/javascript-array-methods-mutating-vs-non-mutating/)
+
+Check out [lodash](https://lodash.com/docs/4.17.4#range) and underscore for useful array operators.
+
+### Add things to array
+
+* `array.push()` adds an item to the end of the array
+* `array.unshift()` adds an item to the beginning of the array.
+
+```javascript
+// since the array will be mutated, 
+// use 'let' rather than 'const'
+let mutatingAdd = ['a', 'b', 'c', 'd', 'e']; 
+
+mutatingAdd.push('f'); // ['a', 'b', 'c', 'd', 'e', 'f']
+mutatingAdd.unshift('z'); // ['z', 'b', 'c', 'd', 'e' 'f']
+```
+
+## Create array dynamically
+```
+var vals = Array.from({length: 13}, (v,i) => i)
+//> (13) [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+
+vals = vals.map(v => v-1)
+//> (13) [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+vals.map(v => ({val: v, : valIncrementer(v, false), disabled: valIncrementer(v, true) }))
+```
+
 ### Get stuff from an array
 
 ```javascript
@@ -462,8 +491,23 @@ Option 2 using `slice` works because a string is really just an array of charact
 
 JSON encodes data as key value pairs. It’s faster and easier to parse with JavaScript than XML.
 
+**Creating JSON**
 
-**Useful JSON operations**
+Dynamically
+
+```javascript
+[1,2,3].map(d => {
+    return {[d]: -d}
+})
+
+// or
+[1,2,3].map(d => ({[d]: -d}))
+
+// yields 
+//> [{1: -1}, {2: -2}, {3: -3}]
+```
+
+**Operations onJSON**
 
 ```javascript
 let users = [
@@ -476,6 +520,8 @@ users[1].country //> undefined
 users.filter(u => u.country !== null).map(u => u.username) //> ["xy"]
 
 ```
+
+
 
 **Key operations**
 

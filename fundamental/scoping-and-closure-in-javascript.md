@@ -209,10 +209,32 @@ getInfoFromURL(path)("pathname")
 ```
 
 
-Thanks for reading! Here are some resources that helped me understand closure:
+## Closure Under The Hood
 
-### Resources
+For background, read [the primer on execution context in JavaScript](http://davidshariff.com/blog/what-is-the-execution-context-in-javascript/)
 
+[This article](https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8) explains it well:
+
+>One intricacy of JavaScript is how it looks for variables. If it can’t find a variable in its local execution context, it will look for it in its calling context. And if not found there in its calling context.
+
+
+> When we start the program, we start in the global execution context. Some variables are declared within the global execution context. We call these global variables. When the program calls a function, what happens? A few steps:
+
+> 1. JavaScript creates a new execution context, a local execution context
+2. That local execution context will have its own set of variables, these variables will be local to that execution context.
+2. The new execution context is thrown onto the execution stack. Think of the execution stack as a mechanism to keep track of where the program is in its execution
+
+If you came from a C or embedded systems background, this should be very familiar. The "global execution context" is like the main operating loop, which contains many subroutines (i.e., helper functions. The "local execution context" is like the stack frame that's created whenever the subroutine starts executing; however, instead of pushing the stack frame onto the [call stack](https://www.wikiwand.com/en/Call_stack), JavaScript pushes it into the heap.  Storing local execution context of a function on the call stack makes the context lost after the function finishes executing. Storing the local execution context in the heap allows your local execution context (i.e., function) to stay alive after it finishes executing. All you need to access that local execution context is a reference to the subroutine.
+
+Languages which support closure (such as JavaScript, Swift and Ruby) will allow you to keep a reference to a scope (including its parent scopes), even after the block in which those variables were declared has finished executing, provided you keep a reference to that block or function somewhere.
+
+Another way of thinking about this is a closure is a persistent scope which holds on to local variables even after the code execution has moved out of that block. The scope object, and all its local variables, are tied to the function, and will persist as long as that function persists.
+
+Closure captures any variables that were in scope when the function was first defined and make these variables available when we later call the function, even if we call the function in a completely different context. Note, the closure captures not the value of the variable nor the value of the reference the variable points to, but the variable itself!
+
+
+**Resources**
+* [I Never Understood JavaScript Closures](https://medium.com/dailyjs/i-never-understood-javascript-closures-9663703368e8) 😍
 * [Everything You Need to Know about Scopes](https://toddmotto.com/everything-you-wanted-to-know-about-javascript-scope/) - which discusses closure.
 * [Secrets of the JavaScript Ninja](https://www.manning.com/books/secrets-of-the-javascript-ninja-second-edition)
 * [Making Functional Programming Click](https://hackernoon.com/making-functional-programming-click-836d4715baf2)
