@@ -630,6 +630,7 @@ const data = [
 ## Babel
 
 * [What is Babel?](https://kleopetrov.me/2016/03/18/everything-about-babel/)
+
 	>Babel is a highly configurable compiler that lets you use experimental JavaScript features and extensions, compiling down into older JavaScript versions that can be supported on a wider range of platforms. Of course, if a native platform doesn't support an ES2015 feature like Promise(), Babel won't fully be able to help -- but it can in many cases "polyfill" missing APIs to provide this functionality.
 * [React Express Tutorial](http://www.react.express/modern_javascript)
 	
@@ -732,6 +733,7 @@ const data = [
 * [Making Functional Programming Click](https://hackernoon.com/making-functional-programming-click-836d4715baf2) 😍
 * [Coders At Work](http://one-shore.com/aaron/books/coders-at-work.pdf)
 * [97 things every programmer should know](file:///Users/xiaoyun/Downloads/97_Things_Every_Programmer_Should_Know.pdf)
+* [Testing in ES6 with Mocha and Babel 6](http://jamesknelson.com/testing-in-es6-with-mocha-and-babel-6/)
 
 ## TODO
 - [ ] Add javascript date function cheatsheet (see [react-native-travel-app](https://github.com/xiaoyunyang/react-native-travel-app) for the code)

@@ -6,6 +6,8 @@
 * [Functional Programming](/fundamental/functional-programming.md)
 * [D3 and Integration With React](/guides/d3-react-integration.md)
 * [Object Oriented Programming](/fundamental/object-oriented-programming.md)
+* How to [write testable code](http://misko.hevery.com/attachments/Guide-Writing%20Testable%20Code.pdf) - [web version](http://misko.hevery.com/code-reviewers-guide/)
+* Two pillars of programming [Part1](https://medium.com/javascript-scene/the-two-pillars-of-javascript-ee6f3281e7f3)
 
 ## Guides
 
@@ -17,8 +19,7 @@
 * [Modern JS Cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet) 😍
 * [Wearhive's List Of Best Practices for JavaScript Projects](https://github.com/wearehive/project-guidelines#readme) 😍
 * Airbnb's [JavaScript Style Guide](https://github.com/airbnb/javascript)
-* How to [write testable code](http://misko.hevery.com/attachments/Guide-Writing%20Testable%20Code.pdf) - [web version](http://misko.hevery.com/code-reviewers-guide/)
-* Two pillars of programming [Part1](https://medium.com/javascript-scene/the-two-pillars-of-javascript-ee6f3281e7f3)
+* [Developer Roadmap](https://github.com/kamranahmedse/developer-roadmap)
 
 
 ## Keep up with Latest Stack

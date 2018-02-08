@@ -314,6 +314,8 @@ GET /graphql?query={ book(id: "1") { title, author { firstName } } }
 >The core idea of REST is the resource. Each resource is identified by a URL, and you retrieve that resource by sending a GET request to that URL. You will likely get a JSON response, since that’s what most APIs are using these days.
 >We can see that the URL with a GraphQL query specifies the resource we’re asking for and also which fields we care about. Also, rather than the server author deciding for us that the related author resource needs to be included, the consumer of the API decides.
 
+[An Introduction to GraphQL](https://hackernoon.com/an-introduction-to-graphql-2c3f7d8fb4e0)
+
 ## Backend
 Modern web apps are built on sophisticated frontend frameworks like React that handles all the UI logic, even routing (`react-router`). While [any backend](https://www.wikiwand.com/en/Comparison_of_web_frameworks) will do the job and developers choose backend frameworks based on their language of choice (e.g., ruby's Ruby on Rails, python's Django, scala's Play, Haskell's Yesod etc.), a poor performing backend can really hurt your webapp's performance and scalability. We need to keep [three main things to consider](https://www.quora.com/Would-you-choose-Node-js-Express-js-or-Play-framework-Java-for-a-new-web-app-project-Why) when choosing a backend framework:
 
@@ -396,6 +398,11 @@ OAuth was developed by Twitter and Ma.gnolia. It is a standard for the delegatio
 * A new approach for application architecture that makes it more difficult to implement authentication
 
 Authentication is your username + password. Authorization is what you're allowed to do.
+
+
+**HTTP requests from mobile web applications**
+Your server can send an eTag as part of the response to your client's HTTP request. The eTag is a hash digest calculated over the content sent by the server. The client can keep a copy of the eTag and next time it asks the server for an update, it can send the eTag with the HTTP request. The server can make a comparison of the eTag in the request, with the eTag calculated over the content it wants to send. If the eTags match, then the server sends a 304 status code, which notifies the client that nothing has changed since the last time the request was made so the client can use what it has stored in its persistent data store on the client side and does not need to download the data again. The eTag is a useful tool for communications between a mobile web application that requires a lot of data from the server because the mobile web app has limited data plan and downloading a lot of data drains the battery.
+
 
 ## Database
 **Why Database?**

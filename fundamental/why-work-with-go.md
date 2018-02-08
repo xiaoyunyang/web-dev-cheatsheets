@@ -4,7 +4,7 @@
 ## What is Go
 [Go](https://github.com/golang/go) is a programming language created by Google. It started as an experiment by some engineers, to develop to address the pain points of  C++ and Java without compromising performance and capability that those languages provides. Other than a well-thought design, it has some specific features for concurrency like a type of light-weight processes called goroutines.
 
-[Tomassett's blog article](https://tomassetti.me/best-programming-languages/) on best articles for each situation, in which he points out:
+In [Tomassett's blog article](https://tomassetti.me/best-programming-languages/) on best articles for each situation, he writes:
 
 > All its [Go's] authors expressed a dislike for C++ complexity. So, in some way, it is a language designed to persuade C people to enter the new century. 
 
