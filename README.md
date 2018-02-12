@@ -20,6 +20,7 @@
 * [Wearhive's List Of Best Practices for JavaScript Projects](https://github.com/wearehive/project-guidelines#readme) 😍
 * Airbnb's [JavaScript Style Guide](https://github.com/airbnb/javascript)
 * [Developer Roadmap](https://github.com/kamranahmedse/developer-roadmap)
+* [Free javascript books](https://jsbooks.revolunet.com/)
 
 
 ## Keep up with Latest Stack

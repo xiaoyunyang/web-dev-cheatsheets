@@ -9,7 +9,7 @@ There are two ways to do OOP:
 
 Composition is superior. I will explain these two concepts using Salad. Suppose you have a business that uses a self-order Kiosk to lets people order salads. They can choose between different ingredients. How would you program your kisok to let your customers pick ingredients for their salads and put in an order?
 
-**OOP with Inheritance**
+### OOP with Inheritance
 
 In the classical inheritance paradigm, you make a Salad class, which includes lettuce, a meat of your choice and a salad dressing of your choice. 
 
@@ -66,6 +66,8 @@ mySalad.getOrder()
 //> {greens: "lettuce", meat: "chicken", dressing: "caesar"}
 ```
 
+>Functions that are intended to be used with the new prefix are called constructors. By convention, they are kept in variables with a capitalized name. If a constructor is called without the new prefix, very bad things can happen without a compile-time or runtime warning, so the capitalization convention is really important. ~JavaScript: The Good Parts
+
 With this approach, you can create many different kinds of salads varying in meat and salad dressing. However, what you want to expand your salad options to include other kinds of greens like kale or spinach?
 
 The Salad object you have written comes with lettuce by default, which you **cannot override** with other greens like kale or spinach. You have to refactor your code now to make `greens` also configurable by adding a new setter function called `this.setGreens(myGreens)`, which should look a lot like the other setter functions you already have.
@@ -121,4 +123,118 @@ There's stuff you can do like refactoring your code everytime you add functional
 
 Let's rewind and see how we can design our `Salad` code differently so we won't run into these problems.
 
-**OOP with Composition**
+
+### OOP with Composition
+
+JavaScript is a prototypal inheritance language. That means that objects can inherit properties directly from other objects. The language is class-free.
+
+When a function is stored as a property of an object, we call it a method. When a method is invoked, this is bound to that object. If an invocation expression contains a refinement (that is, a . dot expression or [subscript] expression), it is invoked as a method:
+
+```javascript
+var salad = {
+	meat: "no meat",
+	dressing: "no dressing",
+	greens: "lettuce",
+	getOrder: function() {
+		return {greens: this.greens, meat: this.meat, dressing: this.dressing}
+	},
+};
+```
+
+```javascript
+var meatChoices = ["chicken", "ham", "shrimp"]
+var dressingChoices = ["ranch", "thousand island", "caesar"]
+```
+
+**Prototype** lets you create new object using old object as prototype:
+
+```javascript
+var caesarSalad = Object.create(salad)
+```
+
+You can think about the prototype as the default object. If we try to retrieve a property value from an object, and if the object lacks the property name, then JavaScript attempts to retrieve the property value from the prototype object.
+
+```javascript
+caesarSalad.getOrder()
+//> {greens: "lettuce", meat: "no meat", dressing: "no dressing"}
+
+caesarSalad.meat = "chicken"
+caesarSalad.dressing = "caesar"
+caesarSalad.getOrder()
+//> {greens: "lettuce", meat: "chicken", dressing: "caesar"}
+```
+
+We can augment the salad object with cheese.
+
+```javascript
+salad.cheese = "no cheese"
+salad.getOrder = function() {
+	return {
+		greens: this.greens, 
+		meat: this.meat, 
+		dressing: this.dressing,
+		cheese: this.cheese
+	}
+}
+```
+
+The prototype relationship is a dynamic relationship. If we add a new property to a prototype, that property will immediately be visible in all of the objects that are based on that prototype:
+
+```javascript
+caesarSalad.getOrder()
+{greens: "lettuce", meat: "chicken", dressing: "caesar", cheese: "no cheese"}
+```
+
+Because we specified a value for `meat` in the new object, it overwrites the prototype object's value for `meat`. We didn't specify anything for `cheese` for the new old object, so the default "no cheese" from the prototype object was inherited.
+
+We can also delete the specifity in the new object to see that the value reverts back to the prototype's value:
+
+```javascript
+delete caesarSalad.meat //> true
+caesarSalad.meat //> "no meat"
+```
+
+
+A method can use this to access the object so that it can retrieve values from the object or modify the object. The binding of this to the object happens at invocation time. This very late binding makes functions that use this highly reusable. Methods that get their object context from this are called public methods.
+
+
+```javascript
+// Augment stooge object with an ageUp method.
+stooge.ageUp = function() { 
+	var that = this;
+	var helper = function() {
+		that.age = that.age+1
+	}
+	helper();
+}
+
+// Augment stooge object with a displayAge method.
+stooge.displayAge = function() { return this.age } 
+
+
+stooge.displayAge() //> 37
+stooge.ageUp()
+stooge.displayAge() //> 38
+```
+**Prototype** lets you create new object using old object as prototype:
+
+```javascript
+var anotherStooge = Object.create(stooge)
+anotherStooge.first_name //> "Jerome"
+anotherStooge.first_name = "Harry"
+anotherStooge.first_name //> "Harry
+```
+
+ 
+
+
+```javascript
+stooge.profession = "actor"
+anotherStooge.profession //> "actor"
+```
+We can also delete:
+
+```javascript
+delete anotherStooge.first_name //> true
+anotherStooge.first_name //> "Jerome"
+```

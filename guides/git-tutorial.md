@@ -27,11 +27,16 @@ In the Terminal, do the following:
 
 4. Link your "local git repo" to a "remote git repo" that you own. Call this remote git repo `origin`.
 
-	`$ git remote add origin ssh://git@github.com/userA/ProjectName.git`
+	```
+	$ git remote add origin ssh://git@github.com/userA/ProjectName.git
+	```
 
-5. Make sure `origin` is an available remote.
+5. Make sure `origin` is an available remote and check the path.
 
-	`$ git remote`
+	```
+	$ git remote
+	# git remote -v
+	`
 
 5. Sync your local repo to your remote repo.
 
@@ -173,25 +178,12 @@ Some useful things you can do when things go haywire or just to get the most use
 
 5. 	If you don't want to have to enter your password everytime when you push to a remote, then in the project local repo, do the following:
 	
-	* Permanently 
-		
-		```
-		$ git config credential.helper store
-		```
-		[git-credential-store](https://git-scm.com/docs/git-credential-store) stores your password unencrypted in the file system:
-		> Using this helper will store your passwords unencrypted on disk, protected only by filesystem permissions. If this is not an acceptable security tradeoff, try git-credential-cache, or find a helper that integrates with secure storage provided by your operating system.
-		
-		
-	* Temporarily
-		
-		```
-		$ git config credential.helper cache
-		```
-		[git-credential-cache](https://git-scm.com/docs/git-credential-cache) stores the password for 15 minutes. Use the git-credential-cache which by default stores the password for 15 minutes. To set a different timeout, use --timeout (here 5 minutes)
-		
-		```
-		$ git config credential.helper 'cache --timeout=300'
-		```
+	* Per [**the official guide from Github**](https://help.github.com/articles/changing-a-remote-s-url/), you want to switch your remote URLs from SSH to HTTPS:
+
+	```
+	$ git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+	```
+	
 
 ## Notes on .gitignore
 The `.gitignore` file should be included in your local repo folder, which tells git to not add files and folders that you don't want to share publically on Github to your remote repo. What kind of files are these?

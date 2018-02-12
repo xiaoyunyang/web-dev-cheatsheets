@@ -89,6 +89,25 @@ printName()
 
 ## Gotchas
 
+### ParseInt
+
+Always use the radix parameter to specify how to parse int. When radix is unspecified, `parseInt` assumes you want to parse by base 10:
+
+```javascript
+parseInt('10') //> 10
+
+// which is equivalent to 
+parseInt('10', 10) //> 10
+```
+
+We can parse by base 2 or base 16
+
+```javascript
+parseInt('10', 2) //> 2
+parseInt('10, 16') //> 2
+parseInt('A', 16) //> 10
+parseInt('A', 10) //> NaN
+```
 
 ### Callback Hell
 **Callback hell**, which refers to deeply nested spaghetti code that jumps all over the place, is a common problem with asynchronous code that impedes developer productivity. How do we fix the callback hell problem?  Here are some workarounds:
@@ -485,6 +504,89 @@ Say we have "hello world" as our string but we only want "world". What do we do?
 
 Option 2 using `slice` works because a string is really just an array of characters.
 
+
+## Functions
+Functions in JavaScript are objects. Objects are collections of name/value pairs having a hidden link to a prototype object. Objects produced from object literals are linked to Object.prototype. Function objects are linked to Function.prototype (which is itself linked to Object.prototype).
+
+
+Since functions are objects, they can be used like any other value. Functions can be stored in variables, objects, and arrays. Functions can be passed as arguments to functions, and functions can be returned from functions. Also, since functions are objects, functions can have methods.
+
+
+The function’s name is optional. The function can use its name to call itself recursively. The name can also be used by debuggers and development tools to identify the function. If a function is not given a name, as shown in the example below, it is said to be anonymous.
+
+```javascript
+// Create a variable called add and store a function// in it that adds two numbers.var add = function (a, b) { 
+	return a + b;
+};
+```
+**Method Invocation**
+When a function is stored as a property of an object, we call it a method. When a method is invoked, this is bound to that object. If an invocation expression con- tains a refinement (that is, a . dot expression or [subscript] expression), it is invoked as a method:
+
+```javascript
+var stooge = {
+	firstName: "Jerome",
+	lastName: "Howard",
+	nickname: "Curley",
+	age: 37,
+	sing: function(subject) {
+   		return "la la this is a song about "+ subject
+	},
+	introduceSelf: function() {
+		return "my name is " + this.firstName + " " + this.lastName + ", but people call me "+ this.nickname
+   },
+   changeNickname: function(nickname) {
+   		this.nickname = nickname;	
+   }
+};
+stooge.sing("frog") //> "la la this is a song about frog"
+
+stooge.introduceSelf() //> "my name is Jerome Howard, but people call me Curley"
+
+stooge.changeNickname("Jerry")
+stooge.introduceSelf() //> "my name is Jerome Howard, but people call me Jerry"
+```
+
+A method can use this to access the object so that it can retrieve values from the object or modify the object. The binding of this to the object happens at invocation time. This very late binding makes functions that use this highly reusable. Methods that get their object context from this are called public methods.
+
+
+```javascript
+// Augment stooge object with an ageUp method.
+stooge.ageUp = function() { 
+	var that = this;
+	var helper = function() {
+		that.age = that.age+1
+	}
+	helper();
+}
+
+// Augment stooge object with a displayAge method.
+stooge.displayAge = function() { return this.age } 
+
+
+stooge.displayAge() //> 37
+stooge.ageUp()
+stooge.displayAge() //> 38
+```
+
+**Mistake in JavaScript's Language's Design**
+
+When a function is not the property of an object, then it is invoked as a function:
+
+```javascript
+var sum = add(3, 4);    // sum is 7
+```     When a function is invoked with this pattern, this is bound to the global object. This was a mistake in the design of the language. Had the language been designed correctly, when the inner function is invoked, this would still be bound to the `this` variable of the outer function. A consequence of this error is that a method cannot employ an inner function to help it do its work because the inner function does not share the method’s access to the object as its this is bound to the wrong value.
+
+
+A bonus parameter that is available to functions when they are invoked is the `arguments` array. It gives the function access to all of the arguments that were supplied with the invocation, including excess arguments that were not assigned to parameters. This makes it possible to write functions that take an unspecified number of parameters:
+
+```javascript// Make a function that adds a lot of stuff.// Note that defining the variable sum inside of// the function does not interfere with the sum// defined outside of the function. The function// only sees the inner one.var sum = function () { var i, sum = 0;
+	for (i = 0; i < arguments.length; i += 1) {
+		sum += arguments[i];
+	}
+	return sum;};// Invoke document.writeln(sum(4, 8, 15, 16, 23, 42)); // 108var array = [3, 4];
+sum.apply(null, array);  //>  7```This is not a particularly useful pattern. In Chapter 6, we will see how we can add a similar method to an array.Because of a design error, arguments is not really an array. It is an array-like object. arguments has a length property, but it lacks all of the array methods. We will see a consequence of that design error at the end of this chapter.
+
+
 ## Awesome JSON Stuff
 
 **What is JSON**
@@ -507,7 +609,110 @@ Dynamically
 //> [{1: -1}, {2: -2}, {3: -3}]
 ```
 
-**Operations onJSON**
+Statically
+
+```javascript
+var stooge = {
+   first_name: "Jerome",
+   "last-name": "Howard"
+};
+
+
+var flight = {
+   airline: "Oceanic",
+   number: 815,
+   departure: {
+      IATA: "SYD",
+      time: "2004-09-22 14:55",
+       city: “Sydney"
+   },
+   arrival: {
+      IATA: "LAX",
+      time: "2004-09-23 10:42",
+      city: "Los Angeles"
+   }
+};
+```
+
+A property’s name can be any string, including the empty string. The quotes around a property’s name in an object literal are optional if the name would be a legal JavaScript name and not a reserved word. So quotes are required around “last-name", but are optional around first_name. Commas are used to separate the pairs.
+
+**Retrieving Things from JSON**
+
+```javascript
+stooge.first_name //> “Jerome”
+stooge[“last-name”] //> Howard
+flight.departure.IATA  //> "SYD"
+```
+
+
+The undefined value is produced if an attempt is made to retrieve a non existent member:
+
+```javascript
+stooge["middle-name"]  //> undefined
+flight.status   //> undefined
+stooge["FIRST-NAME"]   //> undefined
+```
+
+The `||` operator can be used to fill in default values:
+
+```javascript
+var middle = stooge["middle-name"] || "(none)";
+var middle = stooge["middle-name"] || "(none)”;
+var status = flight.status || "unknown"
+```
+
+The `&&` operator can be used to guard against retrieving values from `undefined`
+
+```javascript
+flight.equipment //> undefinedflight.equipment.model //> throw "TypeError"flight.equipment && flight.equipment.model //> undefined
+```
+
+**Update**
+If the object does not already have that property name, the object is augmented:```javascript
+stooge.first_name = 'Jerome';
+stooge['middle-name'] = 'Lester';stooge.nickname = 'Curly';
+```
+
+**Prototype**
+Create new object using old object as prototype:
+
+```javascript
+var anotherStooge = Object.create(stooge)
+anotherStooge.first_name //> "Jerome"
+anotherStooge.first_name = "Harry"
+anotherStooge.first_name //> "Harry
+```
+
+You can think about the prototype as the default object. If we try to retrieve a property value from an object, and if the object lacks the property name, then JavaScript attempts to retrieve the property value from the prototype object. 
+
+The prototype relationship is a dynamic relationship. If we add a new property to a prototype, that property will immediately be visible in all of the objects that are based on that prototype:
+
+```javascript
+stooge.profession = "actor"
+anotherStooge.profession //> "actor"
+```
+
+We can also delete:
+
+```javascript
+delete anotherStooge.first_name //> true
+anotherStooge.first_name //> "Jerome"
+```
+
+**Add function to Prototype**
+
+```javascript
+stooge.sing = function() { return "la la la" }
+anotherStooge.sing() //> "la la la"
+```
+
+```javascript
+flight.hasOwnProperty('number')  // trueflight.hasOwnProperty('constructor')  // false
+```
+
+Functions in JavaScript are objects.
+
+**Operations on JSON**
 
 ```javascript
 let users = [
@@ -520,8 +725,6 @@ users[1].country //> undefined
 users.filter(u => u.country !== null).map(u => u.username) //> ["xy"]
 
 ```
-
-
 
 **Key operations**
 
