@@ -624,7 +624,7 @@ var flight = {
    departure: {
       IATA: "SYD",
       time: "2004-09-22 14:55",
-       city: “Sydney"
+       city: "Sydney"
    },
    arrival: {
       IATA: "LAX",
@@ -635,6 +635,23 @@ var flight = {
 ```
 
 A property’s name can be any string, including the empty string. The quotes around a property’s name in an object literal are optional if the name would be a legal JavaScript name and not a reserved word. So quotes are required around “last-name", but are optional around first_name. Commas are used to separate the pairs.
+
+**Converting JSON from one form to another**
+
+```javascript
+// Create array of objects
+var foo = [1,2,3].map(d => {
+	return {[d]: null};
+});
+
+// Create object with original arrays as keys and null as the values
+var bar = foo.reduce((acc, x) => {
+	for (let key in x) acc[key] = x[key];
+		return acc;
+}, {});
+
+
+```
 
 **Retrieving Things from JSON**
 
