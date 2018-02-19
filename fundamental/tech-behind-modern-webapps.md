@@ -29,7 +29,7 @@ Javascript frameworks provide a way for the client (i.e., the browser) to manipu
 ### React
 >React is a declarative, efficient, and flexible JavaScript library for building user interfaces.
 
-**[React](https://reactjs.org/tutorial/tutorial.html)** is a Javascript library, built and maintained by Facebook. It was developed by [Jordan Walke](https://twitter.com/jordwalke), a software engineer at Facebook. It was open-sourced and announced to the developer community in May 2013. Since then, it has undergone tremendous growth and adoption in the developer community. React is currently on version 16 (See the [Migration log](https://reactjs.org/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes) to appreciate the pace of growth in popularity and capability of React).
+**[`React`](https://reactjs.org/tutorial/tutorial.html)** is a Javascript library, built and maintained by Facebook. It was developed by [Jordan Walke](https://twitter.com/jordwalke), a software engineer at Facebook. It was open-sourced and announced to the developer community in May 2013. Since then, it has undergone tremendous growth and adoption in the developer community. React is currently on version 16 (See the [Migration log](https://reactjs.org/blog/2017/04/07/react-v15.5.0.html#migrating-from-react.proptypes) to appreciate the pace of growth in popularity and capability of React).
 
 React gives the developer full control of the DOM and covers the rendering of initial state and updating the state to reflect changes based on user or server input.
 
@@ -48,6 +48,19 @@ In React, application data flows unidirectionally via the state and props object
 	> Since you’re often displaying a JSON data model to a user, you’ll find that if your model was built correctly, your UI (and therefore your component structure) will map nicely. That’s because UI and data models tend to adhere to the same information architecture, which means the work of separating your UI into components is often trivial.
 	
 For example, when you first click on the link to visit [KhanAcademy](https://www.khanacademy.org/)'s home page -- a webpage built on React -- your browser makes a request to the KhanAcademy's server to load the React code. The browser executes the React code, which creates React components. Each React component generates the part of the DOM it is responsible for by making another (asynchronous) request to the webpage's server or another server's API (more on that later) to grab the data (typically JSON) it needs to generates the appropriate information that needs to be displayed on the webpage.  For subsequent updates to the webpage, the React component repeats the steps to load JSON from the server or API and updates the information on the webpage. 
+
+[matthias nehlsen's blog](http://matthiasnehlsen.com/blog/2014/01/05/play-framework-and-facebooks-react-library/):
+> 
+* In React, components are the basic building blocks, they encapsulate markup and logic together in one place.
+* Components receive immutable data (called props) from parent elements.
+* Components can have state if necessary.
+* React prefers immutable props over mutable state wherever possible, making state changes much easier to reason about.
+* Each component knows how to render itself.
+* Components can have other components as children. They can pass their own state or props to these as immutable props.
+* The entire DOM is rendered into a (fast) virtual DOM with every change made. Changes can either come from mutated state or from parent elements as immutable props.
+* This virtual DOM is then diffed against a representation of the current DOM, with the actual DOM only being manipulated where new and old versions differ.
+* Data coming from business logic outside will not be touched; React can work withimmutable data thoughout.
+* Hierarchical components, props, state, handlers. That’s pretty much it, no more rather unintuitive concepts to understand.
 
 
 ### Redux
@@ -150,7 +163,9 @@ const Router = () => {
 * [`redux-logger`](https://github.com/evgenyrodionov/redux-logger) - logging tool that lets you replay problems as if they happened in your own browser.
 * [`react-redux`](https://github.com/reactjs/react-redux) - We need to use `connect` from `react-redux` to connect a React component to a Redux store.
 
-## RESTful API
+## Building an API
+
+### RESTful API
 > The RESTful API provides a way for the frontend app to talk to a server. 
 
 **Why we need a RESTful API?**
@@ -274,7 +289,7 @@ These are the typical [HTTP status codes](https://www.wikiwand.com/en/List_of_HT
 
 See more [from the DigitalOcean Tutorial](https://www.digitalocean.com/community/tutorials/how-to-troubleshoot-common-http-error-codes)
 
-## GraphQL
+### GraphQL
 [REST vs GraphQL](https://blog.pusher.com/rest-versus-graphql/)
 > GraphQL is a declarative data fetching specification and query language for APIs. It was created by Facebook back in 2012 to power their mobile applications. It is meant to provide a common interface between the client and the server for data fetching and manipulations. GraphQL was open sourced by Facebook in 2015.
 
@@ -426,7 +441,13 @@ Your server can send an eTag as part of the response to your client's HTTP reque
 * HBase: for needing to store a gigantic table (e.g., to do matrix multiplication on or something). For example, a search engine like Google. This is based on Google's BigTable, with support for Map/reduce with Hadoop. Alternative are Accumulo, Hypertable. 
 	* Note:  If you are building a social network, don't be tempted to use BigTable to store graph. It's not efficient and you could have a very sparse table. Use a graph database, such as 
 
+## Stack
 
+**MERN Stack**
+
+![](https://webassets.mongodb.com/_com_assets/cms/MERN_stack-y11tmdeja3.png)
+
+[Source](https://www.mongodb.com/blog/post/the-modern-application-stack-part-1-introducing-the-mean-stack)
 
 ## Tools
 **Node Package Manager (NPM)**

@@ -2,6 +2,7 @@
 
 ## Fundamental
 * [technology behind modern webapps](/fundamental/tech-behind-modern-webapps.md)
+* [Building an isomorphic webapps](/fundamental/isomorphic-webapp.md)
 * [Closure and Scope](/fundamental/scoping-and-closure-in-javascript.md)
 * [Functional Programming](/fundamental/functional-programming.md)
 * [D3 and Integration With React](/guides/d3-react-integration.md)
@@ -18,9 +19,10 @@
 * [Javascript coding best practice](/guides/coding-best-practice.md)
 * [Modern JS Cheatsheet](https://github.com/mbeaudru/modern-js-cheatsheet) 😍
 * [Wearhive's List Of Best Practices for JavaScript Projects](https://github.com/wearehive/project-guidelines#readme) 😍
-* Airbnb's [JavaScript Style Guide](https://github.com/airbnb/javascript)
 * [Developer Roadmap](https://github.com/kamranahmedse/developer-roadmap)
 * [Free javascript books](https://jsbooks.revolunet.com/)
+* Airbnb's [JavaScript Style Guide](https://github.com/airbnb/javascript)
+* Google's [Style Guide for HTML and CSS](https://google.github.io/styleguide/htmlcssguide.html#ID_and_Class_Name_Delimiters)
 
 
 ## Keep up with Latest Stack

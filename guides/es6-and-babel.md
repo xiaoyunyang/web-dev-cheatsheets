@@ -598,12 +598,20 @@ JSON encodes data as key value pairs. It’s faster and easier to parse with Jav
 Dynamically
 
 ```javascript
+// ES6 Syntax
 [1,2,3].map(d => {
-    return {[d]: -d}
-})
+	return {[d]: -d}
+});
+
+// ES 5 Syntax
+[1,2,3].map(d => {
+	var tmp = {};
+	tmp[d] = -d;
+	return tmp;
+});
 
 // or
-[1,2,3].map(d => ({[d]: -d}))
+[1,2,3].map(d => ({[d]: -d}));
 
 // yields 
 //> [{1: -1}, {2: -2}, {3: -3}]
