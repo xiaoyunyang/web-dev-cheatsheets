@@ -51,8 +51,7 @@ For example, when you first click on the link to visit [KhanAcademy](https://www
 
 [matthias nehlsen's blog](http://matthiasnehlsen.com/blog/2014/01/05/play-framework-and-facebooks-react-library/):
 > 
-* In React, components are the basic building blocks, they encapsulate markup and logic together in one place.
-* Components receive immutable data (called props) from parent elements.
+* * 
 * Components can have state if necessary.
 * React prefers immutable props over mutable state wherever possible, making state changes much easier to reason about.
 * Each component knows how to render itself.
@@ -64,104 +63,7 @@ For example, when you first click on the link to visit [KhanAcademy](https://www
 
 
 ### Redux
-> [`redux`](https://redux.js.org/) is a manager of global variables for React components.
 
-**Why we need Redux?**
-
-Sometimes, we want multiple React components to render different views of the same JSON and modify that JSON. We need to have a way to properly manage global variables. [Understanding Redux](http://www.youhavetolearncomputers.com/blog/2015/9/15/a-conceptual-overview-of-redux-or-how-i-fell-in-love-with-a-javascript-state-container) explains the motivation of Redux well. Redux manages the global variables using states.
-
-> `actions` are dispached to trigger `reducers` to change the `store`.
-
-* `store` is where the state of the application lives.
-* `reducer` takes the current state as input and returns the next state. This is the only way to change the state of the application.
-* `action` passes setter functions to React components to make changes to global states managed by redux. 
-
-
-* `container` is basically a React component that is hooked up to redux. It fetches data and renders its corresponding sub-component. The boilerplate for any `container` component includes the following:
-
-	```javascript
-	//AppContainer.js
-	
-	import React from 'react'
-	import { applyMiddleware, compose, createStore } from 'redux'
-	import thunk from 'redux-thunk'
-	import promise from 'redux-promise'
-	import createLogger from 'redux-logger'
-	import { Provider } from 'react-redux'
-	import AppContainer from './app/containers/AppContainer'
-	
-	
-	const configureStore = (initialState) => {
-	   const logger = createLogger();
-  		const store = createStore(
-    	rootReducer,
-    	initialState,
-    	applyMiddleware(thunk, promise, logger)
-  		);
-	}
-	
-	const store = configureStore(window.INITIAL_STATE);
-	
-	const App = () => (
-		<Provider store={store}>
-			<AppContainer />
-		</Provider>
-	
-	)
-	export default AppContainer
-	```
-	
-The `Provider` provides the `store` to the React app, which allows us to `connect` our React components to the redux `store`. The components can't  directly interact with the store; everything has to be done through redux:
-
-* We can retrieve data by obtaining its current state
-* we can change its state by dispatching an action
-
-```javascript
-//AppContainer.js
-//The AppContainer passes all the possible actions to the View components
-
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { ActionCreators } from '../actions'
-import Router from '../components/Router'
-
-//Dispatching functions (boilerplate)
-
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(ActionCreators, dispatch);
-}
-export default connect((state) => {
-  //the state in the argument is the global state of the application
-  return {
-    todoCount: state.todoCount,
-    username: state.username,
-  }
-}, mapDispatchToProps)(Router);
-
-```
-
-```
-// Router.js
-
-const Router = () => {
-
-	// ...
-}
-
-```
-
-
-* Image from [React-redux-connect explained](https://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/)
-
-![](https://www.sohamkamani.com/assets/images/posts/react-redux-explanation/final-connect-flow.svg)
-
-
-**Middleware for Redux**
-
-* [`redux-thunk`](https://github.com/gaearon/redux-thunk) - allows you to write action creators that return a function instead of an action. `redux-thunk` allows you to delay the dispatch of an action or to dispatch only if a certain condition is met. A thunk is a function that wraps an expression to delay its evaluation.
-* [`redux-promise`](https://github.com/acdlite/redux-promise) - receives a promise, dispatch the resolved value of the promise, but will not dismatch anything if the promise rejects.
-* [`redux-logger`](https://github.com/evgenyrodionov/redux-logger) - logging tool that lets you replay problems as if they happened in your own browser.
-* [`react-redux`](https://github.com/reactjs/react-redux) - We need to use `connect` from `react-redux` to connect a React component to a Redux store.
 
 ## Building an API
 
