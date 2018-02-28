@@ -36,7 +36,7 @@ In the Terminal, do the following:
 	```
 	$ git remote
 	# git remote -v
-	`
+	```
 
 5. Sync your local repo to your remote repo.
 

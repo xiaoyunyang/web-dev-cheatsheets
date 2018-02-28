@@ -13,7 +13,7 @@ The book: [Isomorphic Web Applications Chapter 1](https://livebook.manning.com/#
 
 ## What is isomophic Webapp
 
-### Backfround
+### Background
 
 When you create a webpage, there will be static content and there will be dynamic content. 
 
@@ -56,22 +56,38 @@ What really defines an SPA as such, is the fact that client-side JS handles the 
 
 1. **Good**:  History and fast back
 	> When a user presses the browser’s back button they expect the change to happen quickly and for the page to be in a similar state to how it was last time they saw it.
+	>
+	> once the app is initially loaded, it can support quick navigation between pages without refreshing the page, and if done right, can even work offline. ~ [airbnb engineering article](https://medium.com/airbnb-engineering/isomorphic-javascript-the-future-of-web-apps-10882b7a2ebc)
 
 2. **Good**:  Save scroll position
 	> When the user navigates using the browser’s forward or back button the scroll position should be the same as it was last time they were on the page. 
 
 3. **Good**:  XMLHttpRequest (XHR)
 
+4. **Good**: Fast response to user input
+
+	> Apps like Gmail, the classic example of the single-page app, could respond immediately to user interactions, no longer needing to make a round-trip to the server just to render a new page.
+
 SPA was popular in 2013. But over time, the disadvantages of SPA became hard to ignore.
 
 [The disadvantages of a single page application](https://adamsilver.io/articles/the-disadvantages-of-single-page-applications/) include:
 
 1. **Bad**:  SEO
+
 	> For many SPAs, SEO is an afterthought, which is problematic because retro fitting server side rendering is not trivial. The alternative is to create a special website just for bots which isn’t ideal either.
+	
+	> Web crawlers function by making a request to a web server and interpreting the result; but if the server returns a blank page, it’s not of much value. There are workarounds, but not without jumping through some hoops. ~ [airbnb engineering article](https://medium.com/airbnb-engineering/isomorphic-javascript-the-future-of-web-apps-10882b7a2ebc)
+	
 2. **Bad**:  Memory leaks nad long load time.
 	> If an SPA grows to a significant size, loading the entire application on load will be slow.
 
-Also, loading a SPA can be a slow experience for a user (especially on mobile phones). Faster and improved accessibility because the user can view the app without JavaScript.
+	Also, loading a SPA can be a slow experience for a user (especially on mobile phones). Faster and improved accessibility because the user can view the app without JavaScript.
+	
+	> The bulk of the application logic (views, templates, controllers, models, internationalization, etc.) lives in the client, and it talks to an API for data. The server could be written in any language, such as Ruby, Python, or Java, and it mostly handles serving up an initial barebones page of HTML. Once the JavaScript files are downloaded by the browser, they are evaluated and the client-side app is initialized, fetching data from the API and rendering the rest of the HTML page. ~ [airbnb engineering article](https://medium.com/airbnb-engineering/isomorphic-javascript-the-future-of-web-apps-10882b7a2ebc)
+
+3. **Bad**: It [breaks the web](https://ponyfoo.com/articles/stop-breaking-the-web)
+	
+	> Hash routing sucks. It does nothing to help modern browsers (except slowing down the experience, it does do that!) and everything to complicate development and confuse humans who are using older browsers.
 
 ### Why is server side rendering useful?
 > server side rendering is ideal for SEO.
@@ -85,6 +101,14 @@ Google tools for assessing your app for SEO
 * Use Google lighthouse for an in depth anaysis: [https://developers.google.com/web/tools/lighthouse/](https://developers.google.com/web/tools/lighthouse/)* Build a progressive webapp to improve usability for the mobile version of your webpage. [Addy Osamani](https://addyosmani.com/blog/getting-started-with-progressive-web-apps/) wrote extensively about progressive webapps.
 * Use Audit in Chrome's devtools. Build a progressive Web Apps take advantage of new technologies to bring the best of mobile sites & native apps to users. Read [Progressive Webapps with React](https://medium.com/@addyosmani/progressive-web-apps-with-react-js-part-i-introduction-50679aef2b12).
 
+Client side rendering is slow 
+
+> because the human now has to download all of your markup, your CSS, and your JavaScript before the JavaScript is able to render the view the user expected you to deliver in the first place.
+
+> you should be delivering the content in human-viewable form first, and not after every single render blocking request out there finishes loading. This means that a human-ready HTML view should be rendered in the server-side and served to the human, then you can add your fancy JavaScript magic on top of that, while the user is busy making sense of the information you’ve presented them with. ~[stop breaking the web](https://ponyfoo.com/articles/stop-breaking-the-web)
+
+
+
 
 ## React
 > React’s virtual DOM lets us render HTML on the server.
@@ -94,6 +118,13 @@ React is a declarative, efficient, and flexible JavaScript library for building 
 In React, components are the basic building blocks, they encapsulate markup and logic together in one place. Components receive immutable data (called props) from parent components. There's a top-level parent component, which we will refer to as the `Provider`.
 
 React takes advantage of functional concepts by adhering to single direction data flows from the top level component down to its children. What makes it appealing for isomorphic apps is how it uses a virtual DOM to manage changes and updates to the application
+
+React uses a template language called JSX. JSX is compiled by Babel into pure JavaScript. You could write your components with the base React functions, but this is slower and less readable.
+
+We want to take advantage of React to implement a declarative view that can be used to render both on the server and the browser.
+
+
+Any time the app state is updated, the view receives an update and displays it to the user. When the view receives user input, it notifies the app state (Redux) to make an update. The view doesn’t worry about the implementation of the business logic and app state doesn’t worry about how it will be displayed.
 
 ## Redux
 
@@ -113,6 +144,8 @@ From the book:
 ![](https://dpzbhybb2pdcj.cloudfront.net/gordon/v-10/Figures/01_12.png)
 
 ### What is Redux
+
+Redux is based on the idea of a single root state object for the entire application, commonly referred to as the store. 
 
 * **Store** -  Redux holds the state of your app in its store, providing a single source of truth for your application. Redux’s store is where the state of the application lives. Redux's store is the top level (global) state of your client application and should not be confused with React component's state, which is local to the component. As the book says it:
 	
@@ -157,6 +190,8 @@ const App = () => (
 
 export default AppContainer
 ```
+
+The Provider component acts as the stateful top level component. It knows when the store updates and passes that change down to its children. Individual components are also able to subscribe to the store as needed.
 
 **Reducer Setup**
 
