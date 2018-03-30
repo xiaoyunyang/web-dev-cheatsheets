@@ -373,6 +373,7 @@ fun()[1] //> {fun: "outer", this: Window, name: "foo"}
 ```
 
 If you removed the name `var` in front of the `name` in the inner function, you'll get different answers
+
 ```javascript
 var fun = function() {
 	this.name = "foo"
@@ -385,4 +386,68 @@ return [innerFun(), {fun: "outer", this: this, name: this.name}]
 
 fun()[0] //> {fun: "inner", this: Window, name: "bar"}
 fun()[1] //> {fun: "outer", this: Window, name: "bar"}
+```
+
+## JavaScript and Context
+
+[Why and how to bind methods](http://reactkungfu.com/2015/07/why-and-how-to-bind-methods-in-your-react-component-classes/)
+>In languages like Ruby or Java, this (or in case of Ruby self) will always point to the object in which your method is defined. So in Ruby if you are working on the foo method inside the Bar class, self will always point to the object which is the instance of the Bar class.
+
+>JavaScript works quite surprisingly here. Because in JavaScript function context is defined while calling the function, not while defining it! This is what can surprise many when coming to JS from different fields. Such late binding is a powerful mechanism which allows us to re-use loosely coupled functions in variety of contexts.
+
+
+### Bind
+
+> Bounded function in JavaScript is a function that is bounded to a given context. That means no matter how you call it, the context of the call will stay the same. The only exception is the new operator which always return a new context.
+
+
+```javascript
+function add(x, y) {
+  this.result += x + y;
+  return this.result;
+}
+
+var computation1 = { result: 0 };
+var boundedAdd = add.bind(computation1);
+
+boundedAdd(-1,-2) //> -3
+boundedAdd(-1,-2) //> -6
+
+// Change context
+computation1 = { result: 12 };
+boundedAdd = add.bind(computation1);
+boundedAdd(-1,-2) //> 9
+```
+
+### Class
+
+> ECMAScript 2015 (ECMAScript 6) introduced a new class syntax that can be used to create React component classes. In fact, this class syntax is a syntactic sugar for the old, prototype system of object-oriented JavaScript.
+
+```javascript
+class Foo {
+  constructor() {
+    this.x = 2;
+    this.y = 4;
+  }
+
+  bar() {
+    // ...
+  }
+
+  baz() {
+    // ...
+  }
+}
+```
+
+Is roughly the same as:
+
+```javascript
+function Foo() {
+  this.x = 2;
+  this.y = 4;
+
+  this.bar = function() { // ... };
+  this.baz = function() { // ... };
+}
 ```

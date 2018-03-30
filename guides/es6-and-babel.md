@@ -354,6 +354,32 @@ let mutatingAdd = ['a', 'b', 'c', 'd', 'e'];
 mutatingAdd.push('f'); // ['a', 'b', 'c', 'd', 'e', 'f']
 mutatingAdd.unshift('z'); // ['z', 'b', 'c', 'd', 'e' 'f']
 ```
+### Common Algo:
+
+Match parentheses in a string.
+
+```javascript
+function isBalanced(str, openCnt) {
+console.log('str = ', str)
+	if (str === undefined || str === null || typeof str !== 'string') {
+		return false;
+    } else if (openCnt <  0) {
+		return false;
+	} else if( str.length === 0 && openCnt === 0) {
+		return true;
+	} 
+
+	const fst = str[0];
+	const rst = str.slice(1); 
+	return isBalanced(rst, newOpenCnt(fst, openCnt));
+}
+
+const newOpenCnt = (c, openCnt) => {
+	if(c === '(') return openCnt + 1;
+	if(c === ')') return openCnt - 1;
+	return openCnt;
+}
+```
 
 ## Create array dynamically
 ```
@@ -836,6 +862,14 @@ var {firstName, lastName} = user
 firstName //> "amy"
 lastName //> "winehouse"
 
+```
+
+**Merging two JSON objects**
+
+```javascript
+let foo = {a: 'a', b: 'b'}
+let bar = {c: 'c', d: 'd'}
+let foobar = {...foo, ...bar} //> {a: "a", b: "b", c: "c", d: "d"}
 ```
 
 ### Practice

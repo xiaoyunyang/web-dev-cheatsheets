@@ -238,3 +238,6 @@ We can also delete:
 delete anotherStooge.first_name //> true
 anotherStooge.first_name //> "Jerome"
 ```
+
+## Read
+* [ ] Classes in ES6 [official doc](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes)

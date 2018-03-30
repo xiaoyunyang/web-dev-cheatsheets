@@ -24,6 +24,7 @@
 * Airbnb's [JavaScript Style Guide](https://github.com/airbnb/javascript)
 * Google's [Style Guide for HTML and CSS](https://google.github.io/styleguide/htmlcssguide.html#ID_and_Class_Name_Delimiters)
 * [Case Study](https://docs.google.com/document/d/1ihmYy7mwGY7SuRix774VcDoYpRbvgZdmM1lapbiuv6g/edit) for how to create a good landing page with good SEO and UX 👍
+* [TLDR Addy Osmani Design Patterns](https://github.com/karlpatrickespiritu/TLDR-Learning-JS-Design-Patterns-by-Addy-Osmani) 👍
 
 ## Keep up with Latest Stack
 * [Stackshare 2017 Post](https://stackshare.io/posts/top-developer-tools-2017)

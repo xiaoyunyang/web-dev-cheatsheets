@@ -15,6 +15,11 @@ The book: [Isomorphic Web Applications Chapter 1](https://livebook.manning.com/#
 
 ### Background
 
+[https://blog.tableflip.io/server-side-rendering-with-react-and-redux/](https://blog.tableflip.io/server-side-rendering-with-react-and-redux/)
+> Traditionally if you’re serving a website, a request will come into your server, and your app will gather all the data it needs to render the page and then use Handlebars or Jade or whatever to smoosh the two together and send the resultant HTML down to the browser. If you’re using a client side app like react, you get the templates sent to you first, and then you request the data for that page (from your API). Maybe you do an initial render in between, show a nice spinner or something, but when that data finally comes back, you do a re-render to show the page you wanted.
+> 
+> We all want it - the Holy Grail of having your app render server side to give your users a quicker initial rendering and to help SEO. The problem is that React doesn’t fit with the traditional model for server side rendering, in fact React turns it on it’s head.
+
 When you create a webpage, there will be static content and there will be dynamic content. 
 
 ![Manning Isomorphic Webapp](https://dpzbhybb2pdcj.cloudfront.net/gordon/v-10/Figures/01_09.png)
@@ -43,7 +48,8 @@ Three main steps in an isomorphic app:
 3. single-page application behavior
 	- Once the page enters into Single Page Application (SPA) mode, updates are initiated by events, usually from the user.
 
-
+[Isomorphic vs. Universal app](https://medium.com/@ghengeveld/isomorphism-vs-universal-javascript-4b47fb481beb)
+>Isomorphism is the functional aspect of seamlessly switching between client- and server-side rendering without losing state. Universal is a term used to emphasize the fact that a particular piece of JavaScript code is able to run in multiple environments.
 
 ### Why is SPA useful?
 > SPA lets you have interesting webpages that handle complex user interactions.
@@ -78,7 +84,7 @@ SPA was popular in 2013. But over time, the disadvantages of SPA became hard to 
 	
 	> Web crawlers function by making a request to a web server and interpreting the result; but if the server returns a blank page, it’s not of much value. There are workarounds, but not without jumping through some hoops. ~ [airbnb engineering article](https://medium.com/airbnb-engineering/isomorphic-javascript-the-future-of-web-apps-10882b7a2ebc)
 	
-2. **Bad**:  Memory leaks nad long load time.
+2. **Bad**:  Memory leaks and long load time.
 	> If an SPA grows to a significant size, loading the entire application on load will be slow.
 
 	Also, loading a SPA can be a slow experience for a user (especially on mobile phones). Faster and improved accessibility because the user can view the app without JavaScript.
@@ -108,8 +114,6 @@ Client side rendering is slow
 > you should be delivering the content in human-viewable form first, and not after every single render blocking request out there finishes loading. This means that a human-ready HTML view should be rendered in the server-side and served to the human, then you can add your fancy JavaScript magic on top of that, while the user is busy making sense of the information you’ve presented them with. ~[stop breaking the web](https://ponyfoo.com/articles/stop-breaking-the-web)
 
 
-
-
 ## React
 > React’s virtual DOM lets us render HTML on the server.
 
@@ -125,6 +129,26 @@ We want to take advantage of React to implement a declarative view that can be u
 
 
 Any time the app state is updated, the view receives an update and displays it to the user. When the view receives user input, it notifies the app state (Redux) to make an update. The view doesn’t worry about the implementation of the business logic and app state doesn’t worry about how it will be displayed.
+
+## React Router V4 and Universal
+
+For an isomorphic webapp, you need two things: (1) server delivers fully rendered HTML to the browser on initial load. (2) client SPA hooks itself to the HTML rendered by the server and responds to user interaction like cliking on the nav link.
+
+**TL;DR** here's what you need to do:
+
+1. Use `StaticRoute` for server side rendering
+2. Use `BrowserRoute` for client side rendering
+3. Set up webpack config to make `main.js` your main entry point for your SPA
+
+I will be focusing on React Router V4 and use `react-router-config` to set up the app with routes to render both on the server side and client side.
+
+Here are some repos and docs that helped me figure out how to set up the project:
+
+* [technology-ebay-de/universal-react-router4](https://github.com/technology-ebay-de/universal-react-router4/tree/master/src/shared)
+* [zacfukuda/universal-app-react-router](https://github.com/zacfukuda/universal-app-react-router)
+* [React Router training on server rendering](https://reacttraining.com/react-router/web/guides/server-rendering)
+* [isomorphic-dev-js](https://github.com/isomorphic-dev-js/complete-isomorphic-example)
+* [EmileCantin's blog](https://blog.emilecantin.com/web/react/javascript/2017/05/16/ssr-react-router-4-webpack-code-split.html)
 
 ## Redux
 

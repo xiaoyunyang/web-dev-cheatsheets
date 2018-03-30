@@ -11,24 +11,44 @@
 * userC wants to fork the `ProjectName` repo from userB.
 
 ## Git Tutorial For userA
-Go to https://<span></span>github.com/`userA`/ and click the "New" button. Name the new repo `ProjectName`.
+Go to https://<span></span>github.com/`userA`/ and click the "New" button. Name the new repo `project-name`.
 
-On your computer, in Finder, make a new folder called `ProjectName`. Copy all the files you want to the `ProjectName` folder.
+1. On your computer, go to terminal and `cd` into the directory you want to host the local repo, then do:
+	
+	```
+	$ git clone https://github.com/userA/project-name.git
+	```
+2. Check that you have remote:
+
+	```
+	$ git remote
+	origin
+	```
+3. Open the project in finder and in atom to edit the content of the folder.
+	
+	```
+	$ open .
+	$ atom .
+	```
+
+Alternatively...
+
+On your computer, in Finder, make a new folder called `project-name`. Copy all the files you want to the `ProjectName` folder.
 
 In the Terminal, do the following:
 
-1. Type `cd` into the terminal then drag the `ProjectName` folder  into the terminal. You’ll see `directoryPath` being auto-completed in Terminal.
+1. Type `cd` into the terminal then drag the `project-name` folder  into the terminal. You’ll see `directoryPath` being auto-completed in Terminal.
 
 	`$ cd directoryPath` 
 
-3. Initialize the `ProjectName` folder as a git repo. This essentially makes this folder a "local git repo".
+3. Initialize the `project-name` folder as a git repo. This essentially makes this folder a "local git repo".
 
 	`$ git init`
 
 4. Link your "local git repo" to a "remote git repo" that you own. Call this remote git repo `origin`.
 
 	```
-	$ git remote add origin ssh://git@github.com/userA/ProjectName.git
+	$ git remote add origin ssh://git@github.com/userA/project-name.git
 	```
 
 5. Make sure `origin` is an available remote and check the path.
@@ -66,7 +86,7 @@ In the Terminal, do the following:
 <br>
 
 ## Git Tutorial For userC
-Go to https://<span></span>github.com/``userB``/``ProjectName`` and click the "Fork" button.
+Go to https://<span></span>github.com/`userB`/`project-name` and click the "Fork" button.
 
 In the Terminal, do the following:
 
@@ -74,40 +94,40 @@ In the Terminal, do the following:
 
 	`$ cd directoryPath` 
 
-2. Make a new folder called `ProjectName`.
+2. Make a new folder called `project-name`.
 
-	`$ mkdir ProjectName`
+	`$ mkdir project-name`
 
-3. Go into the `ProjectName` folder
+3. Go into the `project-name` folder
 
-	`$ cd ProjectName`
+	`$ cd project-name`
 
-4. Initialize the `ProjectName` folder as a git repo. This essentially makes this folder a "local git repo".
+4. Initialize the `project-name` folder as a git repo. This essentially makes this folder a "local git repo".
 
 	`$ git init`
 
 5. Link your "local git repo" to a "remote git repo" that you own. Call this remote git repo `origin`.
 
-	`$ git remote add origin ssh://git@github.com/userC/ProjectName.git`
+	`$ git remote add origin ssh://git@github.com/userC/project-name.git`
 
-6. Populate the `ProjectName` folder on your computer (i.e., local repo) with the files from the remote repo's master branch.
+6. Populate the `project-name` folder on your computer (i.e., local repo) with the files from the remote repo's master branch.
 
 
 	`$ git pull origin master`
 
-7. List the files in your `ProjectName` folder to make sure the pull was successful. You should see this folder populated with files downloaded from the remote repo
+7. List the files in your `project-name` folder to make sure the pull was successful. You should see this folder populated with files downloaded from the remote repo
 
 	`$ ls`
 
-8. Link your "local git repo" to another remote git repo that userB owns. Recall you forked the `ProjectName` repo from userB. The upstream user's (i.e., userB) repo. Call this `upstream`.
+8. Link your "local git repo" to another remote git repo that userB owns. Recall you forked the `project-name` repo from userB. The upstream user's (i.e., userB) repo. Call this `upstream`.
 	
-	`$ git remote add upstream https://github.com/userB/ProjectName`
+	`$ git remote add upstream https://github.com/userB/project-name`
 
 9. Make sure `origin` and `upstream` are both available remote.
 
 	`$ git remote`
 	
-10. Now open a file within `ProjectName` in [Atom](https://atom.io/) or another text editor. Make some changes to the code. To sync your local repo with your remote repo, do this:
+10. Now open a file within `project-name` in [Atom](https://atom.io/) or another text editor. Make some changes to the code. To sync your local repo with your remote repo, do this:
 
 	```
 	$ git fetch origin
